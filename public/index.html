@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>선생님이 부르신다</title>
+  <!-- Firebase JavaScript SDK 추가 -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+  <script>
+    // Firebase 구성 정보
+    var firebaseConfig = {
+        apiKey: "O8csgLu4Ao2utJiMalILRNvXk6p2ak1y5Nr2DiPi",
+        authDomain: "teachercalls.firebaseapp.com",
+        databaseURL: "https://teachercalls-default-rtdb.firebaseio.com/",
+        projectId: "teachercalls",
+        storageBucket: "teachercalls.appspot.com",
+        messagingSenderId: "451343811154",
+        appId: "1:451343811154:web:c35df2e84eba3033af158b"
+    };
+    
+    // Firebase 초기화
+    firebase.initializeApp(firebaseConfig);
+    
+    // Realtime Database 참조 생성
+    var database = firebase.database();
+    
+    // 값을 업로드하는 함수
+    function uploadValue() {
+        var classes=document.getElementById("target").value;
+        var eachclass=classes.split(" ");
+        for(const Classname of eachclass){
+            var value = document.getElementById("valueInput").value;
+            database.ref(Classname).set(value)
+            /*.then(function() {
+              alert("값이 성공적으로 업로드되었습니다.");
+            })
+            .catch(function(error) {
+              console.error("값 업로드 중 오류가 발생했습니다.", error);
+            });*/
+        }
+    }
+  </script>
+</head>
+<body>
+  <h1>선생님이 부르신다 업로드</h1>
+  <input type="text" id="target" placeholder="대상 반 입력(띄어쓰기로 구분)">
+  <input type="text" id="valueInput" placeholder="업로드할 문자열 입력">
+  <button onclick="uploadValue()">값 업로드</button>
+</body>
+</html>
